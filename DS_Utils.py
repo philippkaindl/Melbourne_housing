@@ -1,6 +1,8 @@
 import pandas as pd
 
-def display_all(df):
-    with pd.option_context("display.max_rows", 1000): 
-        with pd.option_context("display.max_columns", 1000): 
-            pd.display(df)
+
+def plotMissingValuesDF(df):
+    '''df is a dataframe we want to plot the missing values of, sorted by columns'''
+    missingValuesofDF = df[df.isnull().sum() > 0]
+    missingValuesofDF.sort_values(inplace=True, reversed = True)
+    missingValuesofDF.plot.bar()
