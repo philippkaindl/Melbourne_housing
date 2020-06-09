@@ -33,6 +33,10 @@ def PreprocessWithFastAI(cat_cols, num_cols, X_train,X_test):
     cat_tfm = Categorify(cat_cols, num_cols)
     cat_tfm.apply_train(X_train)
     cat_tfm.apply_test(X_test)
+    for col in cat_cols:
+        X_train[col] = X_train[col].cat.codes
+        X_test[col] = X_test[col].cat.codes
+
 
     norm_tfm = Normalize(cat_cols, num_cols)
     norm_tfm.apply_train(X_train)
