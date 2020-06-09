@@ -1,5 +1,5 @@
 import pandas as pd
-from fastai.tabular import Categorify, FillMissing, Normalize
+from fastai.tabular import *
 
 def plotMissingValuesDF(df, percentage = True):
     '''df is a dataframe we want to plot the missing values of, sorted by columns'''
@@ -26,6 +26,9 @@ def dropColumnsAbovePercentage(df, percentage = 0.8):
         return None 
 
 def PreprocessWithFastAI(cat_cols, num_cols, X_train,X_test):
+    
+
+
     fMiss_tfm = FillMissing(cat_cols, num_cols, fill_strategy= FillStrategy.MEDIAN)
     fMiss_tfm.apply_train(X_train)
     fMiss_tfm.apply_test(X_test)
@@ -36,6 +39,7 @@ def PreprocessWithFastAI(cat_cols, num_cols, X_train,X_test):
     for col in cat_cols:
         X_train[col] = X_train[col].cat.codes
         X_test[col] = X_test[col].cat.codes
+
 
 
     norm_tfm = Normalize(cat_cols, num_cols)
