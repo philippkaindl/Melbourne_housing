@@ -47,3 +47,12 @@ def PreprocessWithFastAI(cat_cols, num_cols, X_train,X_test):
     norm_tfm.apply_test(X_test)
 
     return X_train, X_test
+
+    def findAndReplaceNANwithZero(df):
+        tmp = df.isnull().sum() > 0
+        columns_wihtNAN = list(tmp[tmp == True].index)
+
+        for col in columns_wihtNAN:
+            df[col].fillna(0, inplace = True)
+
+        
